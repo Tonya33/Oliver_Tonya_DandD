@@ -32,8 +32,8 @@ body {
 
 }
 
-.puzzle-board { 
-	width:600px; 
+.puzzle-board {
+	width:600px;
 	background-image: url('../images/backGround0.jpg');
 	background-repeat: no-repeat;
 }
