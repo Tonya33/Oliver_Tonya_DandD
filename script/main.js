@@ -1,14 +1,30 @@
 (() => {
 	// collect the buttons at the bottom of the page
 	let theThumbnails = document.querySelectorAll("#buttonHolder img"),
-	gameBoard = document.querySelector(".puzzle-board"),
-	puzzlePieces = document.querySelectorAll(".puzzle-pieces *"),
-	dropZone = document.querySelectorAll(".drop-zone");
+			gameBoard = document.querySelector(".puzzle-board"),
+			puzzlePieces = document.querySelectorAll(".puzzle-pieces *"),
+			dropZone = document.querySelectorAll(".drop-zone"),
+			dragZone = document.querySelector(".puzzle-pieces");
+
+	const puzzlePaths = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
 
 
-	function changeBGImg() {
-		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`
+	function changeImgSet() {
+		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
 		// debugger;
+		//loop through all of the small draggable images and change their src attributes with js
+		puzzlePaths.forEach((img, index) => {
+			puzzlePieces[index].src = `images/${img + this.dataset.bgref}.jpg`;
+		});
+		
+		dropZone.forEach(zone => {
+			dropZone.src = ('currentItem');
+			dragZone.appendChild(document.querySelector(`currentItem`));
+
+
+		});
+
+
 	}
 	function dragStarted(event) {
 		console.log('started dragging a piece');
@@ -31,8 +47,12 @@
 	}
 	function turnAnchorOff(e) {
 		e.preventDefault();
+
 	}
-	theThumbnails.forEach(thumb => thumb.addEventListener("click", changeBGImg));
+
+
+
+	theThumbnails.forEach(thumb => thumb.addEventListener("click", changeImgSet));
 
 	//listen for the drag event
 	puzzlePieces.forEach(piece => piece.addEventListener("dragstart", dragStarted));
@@ -40,6 +60,14 @@
 	dropZone.forEach(zone => {
 		zone.addEventListener("dragover", allowDragOver);
 		zone.addEventListener("drop", allowDrop);
-	});
+
+	//theThumbnails.forEach(thumb => thumb.addEventListener("click", resetPieces));
+
+
+
+
+});
+
+
 
 })();
