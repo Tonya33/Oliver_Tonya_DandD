@@ -16,13 +16,11 @@
 		puzzlePaths.forEach((img, index) => {
 			puzzlePieces[index].src = `images/${img + this.dataset.bgref}.jpg`;
 		});
-		
+		/*function resetPieces() {
 		dropZone.forEach(zone => {
-			dropZone.src = ('currentItem');
-			dragZone.appendChild(document.querySelector(`currentItem`));
-
-
-		});
+			dropZone[index].src('currentItem');
+			puzzlePaths.appendChild(document.querySelector(`currentItem`));
+		});*/
 
 
 	}
@@ -40,7 +38,10 @@
 		event.preventDefault();
 		console.log('dropped on me');
 		//retrieve the dragged element using the dataTransfer object
-		let droppedEl = event.dataTransfer.getData('currentItem');
+		let droppedTopLeft = event.dataTransfer.getData('topLeft');
+		let droppedTopRight = event.dataTransfer.getData('topRight');
+		let droppedBottomLeft = event.dataTransfer.getData('bottomLeft');
+		let droppedBottomRight = event.dataTransfer.getData('bottomRight');
 		console.log(droppedEl);
 //appendChildis a js function that adds an elemet to another child
 		this.appendChild(document.querySelector(`#${droppedEl}`));
@@ -50,9 +51,17 @@
 
 	}
 
+	function resetPieces() {
+	dropZone.forEach(zone => {
+		collection = dropZone.children;
+
+		this.appendChild(document.querySelector(puzzlePieces));
+		console.log(dropZone.children.tagName);
+})};
 
 
-	theThumbnails.forEach(thumb => thumb.addEventListener("click", changeImgSet));
+
+	theThumbnails.forEach(thumb => thumb.addEventListener("click", changeImgSet, resetPieces));
 
 	//listen for the drag event
 	puzzlePieces.forEach(piece => piece.addEventListener("dragstart", dragStarted));
